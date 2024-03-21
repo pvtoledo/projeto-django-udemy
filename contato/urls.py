@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.contato, name='contato'),
+    path('mensagem', views.processa_contato, name='mensagem'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
