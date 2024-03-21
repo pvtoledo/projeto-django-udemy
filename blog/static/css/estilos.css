@@ -1,0 +1,15 @@
+.img-350{
+    height: 350px;
+    object-fit: cover;
+}
+
+.img-350-list{
+    height: 350px;
+    object-fit: cover;
+    object-position: center 25%;
+}
+
+.avatar{
+    width:100px;
+    height:100px;
+}
