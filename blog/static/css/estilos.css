@@ -3,6 +3,12 @@
     object-fit: cover;
 }
 
+.img-quiz{
+    height: 220px;
+    object-fit: cover;
+    object-position: center 35%;
+}
+
 .img-350-list{
     height: 350px;
     object-fit: cover;

@@ -1,0 +1,9 @@
+<div class="span me-3 btn"
+    hx-get="{% url 'comentar_post_htmx' post.id %}"
+    hx-target="#modals-here"
+    hx-trigger="click"
+    data-bs-toggle="modal"
+    data-bs-target="#modals-here">
+    <i class="fa-solid fa-comment fa-xl"></i> Comentar
+</div>
+

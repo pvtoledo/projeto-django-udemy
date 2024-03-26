@@ -1,0 +1,97 @@
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <form>
+            {% csrf_token %}
+            <div class="modal-header border-0">
+                <h5 class="modal-title">
+                    <div class="d-flex">
+                        <div class="text-secondary me-1">Comentando o post </div>
+                        <div class="text-primary"> {{ post.titulo }}</div>
+                    </div>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Comentário:</label>
+                    <input style="height: 100px"
+                              class="form-control"
+                              id="message-text"
+                              name="comentario"
+                              value="{{comentario.texto}}">
+                    </input>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+
+                {% block btn_comentar %}
+                    <button class="btn btn-success"
+                        hx-post="{% url 'comentarios' post.id %}"
+                        hx-trigger="click">
+                    Comentar
+                </button>
+                {% endblock %}
+            </div>
+
+            {% block lista_de_comentarios %}
+                <ul class="ul list-group list-group-flush">
+
+                {% for comentario in comentarios %}
+                    <li class="list-group-item">
+                        <!-- CARD Comentário -->
+                        <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+
+                        <div class="col-md-1">
+                            <img src="{{ comentario.perfil.foto.url }}"
+                                 style="height: 35px; width: 35px;"
+                                 class="rounded-circle mt-3 ms-2">
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="card-body">
+
+                                <p class="card-text">{{comentario.texto}}</p>
+
+                                <p class="card-text">
+                                    <small class="text-muted">{{ comentario.perfil.user.username }}</small>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <div class="row">
+                                <div class="col-md mt-3 me-0"
+                                     hx-get="{% url 'editar_comentario_htmx' comentario.id %}"
+                                     hx-target="#modals-here"
+                                     hx-trigger="click">
+                                    <i class="fa-solid fa-pen fa-xs"></i>
+                                </div>
+
+                                <div class="col-md mt-3 me-0"
+                                     hx-delete="{% url 'deletar_comentario_htmx' comentario.id %}"
+                                     hx-trigger="click"
+                                     hx-confirm="Deseja excluir o comentário?">
+                                    <i class="fa-solid fa-trash fa-xs"></i>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                    </li>
+                {% endfor %}
+
+            </ul>
+            {% endblock %}
+
+        </form>
+    </div>
+</div>
+
